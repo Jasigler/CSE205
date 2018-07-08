@@ -7,10 +7,8 @@ import java.io.PrintWriter;
 
 public class HW1 {
 
-	public static void main(String[] args) throws FileNotFoundException {
-		//Instantiate new scanner and write objects
-		File inputFile = new File("output.txt");
-		Scanner scan = new Scanner(System.in);
+	public static void main(String[] args)  {
+		
 		
 		
 		
