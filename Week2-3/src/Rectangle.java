@@ -30,6 +30,7 @@ public class Rectangle {
         return mX;
     }
 
+
     public int getY() {
         return mY;
     }
@@ -38,6 +39,8 @@ public class Rectangle {
         setX(pNewX);
         setY(pNewY);
     }
+
+
 
     public void resize(int pNewWidth, int pNewHeight){
         setWidth(pNewWidth);
@@ -59,4 +62,5 @@ public class Rectangle {
     public void setX (int newX) {
         mX = newX;
     }
+
 }

@@ -1,8 +1,9 @@
-public class Square {
+public class Square extends Rectangle {
 
     private int mSideLen;
     private int mX;
     private int mY;
+    private String squareName;
 
 
     //constructors
@@ -40,6 +41,10 @@ public class Square {
 
     public void setX(int newX) {
         mX = newX;
+    }
+
+    public void setSquareName(String newSquareName){
+        squareName = newSquareName;
     }
 
     public void setY(int newY) {
