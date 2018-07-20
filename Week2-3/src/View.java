@@ -5,17 +5,14 @@
 // Implements the GUI for a calculator.
 //
 //**************************************************************************************************
+import com.sun.deploy.panel.PathRenderer;
+import com.sun.deploy.panel.SpecialTableRenderer;
+
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import javax.swing.Box;
-import javax.swing.BoxLayout;
-import javax.swing.JButton;
-import javax.swing.JFrame;
-import javax.swing.JLabel;
-import javax.swing.JOptionPane;
-import javax.swing.JPanel;
-import javax.swing.JTextField;
+import java.beans.PropertyChangeListener;
+import javax.swing.*;
 import javax.swing.border.Border;
 
 import static java.awt.BorderLayout.*;
@@ -53,10 +50,11 @@ public class View extends JFrame implements ActionListener {
         addButton(panelSysButton, "Exit");
 
 
-        // Declare and create a JPanel named panelFunctSys. Use the BorderLayout layout manager.
+            // Declare and create a JPanel named panelFunctSys. Use the BorderLayout layout manager.
         // Add panelFunctButton to the CENTER region. Add panelSysButton to the SOUTH region.
         JPanel panelFunctSys = new JPanel();
-        panelFunctSys.add(panelSysButton, BorderLayout.CENTER);
+        panelFunctSys.setLayout(new BorderLayout());
+        panelFunctButton.add(panelFunctButton, BorderLayout.CENTER);
         panelFunctSys.add(panelSysButton, BorderLayout.SOUTH);
 
         // Declare and create a JPanel named panelKeypad. Use the GridLayout layout manager with
@@ -64,15 +62,17 @@ public class View extends JFrame implements ActionListener {
         // on.
         JPanel panelKeypad = new JPanel();
         panelKeypad.setLayout(new GridLayout(4, 4));
-        addButton(panelKeypad, "9");
-        addButton(panelKeypad, "8");
         addButton(panelKeypad, "7");
-        addButton(panelKeypad, "6");
-        addButton(panelKeypad, "5");
+        addButton(panelKeypad, "8");
+        addButton(panelKeypad, "9");
+        addButton(panelKeypad, "/");
         addButton(panelKeypad, "4");
-        addButton(panelKeypad, "3");
-        addButton(panelKeypad, "2");
+        addButton(panelKeypad, "5");
+        addButton(panelKeypad, "6");
+        addButton(panelKeypad, "*");
         addButton(panelKeypad, "1");
+        addButton(panelKeypad, "2");
+        addButton(panelKeypad, "3");
         addButton(panelKeypad, "0");
 
 
@@ -103,10 +103,18 @@ public class View extends JFrame implements ActionListener {
         // Add some vertical glue to panelMain (using Box.createVerticalGlue()). Add panelLabel.
         // Add some more vertical glue. Add panelTextField. Add panelBottom. Add some more vertical
         // glue.
+        JPanel panelMain = new JPanel();
+        panelMain.setLayout(new BoxLayout(panelMain, BoxLayout.PAGE_AXIS));
+        panelMain.add(Box.createVerticalGlue());
+        panelMain.add(panelLabel);
+        panelMain.add(Box.createVerticalGlue());
+        panelMain.add(panelTextField);
+        panelMain.add(panelBottom);
+        panelMain.add(Box.createVerticalGlue());
 
 
         // Set the title bar string of this JFrame.
-        setTitle("Kalkutron-9000");
+       setTitle("Kalkutron-9000");
 
         // Set the width and height of this JFrame.
         setSize(FRAME_WIDTH, FRAME_HEIGHT);
@@ -141,13 +149,17 @@ public class View extends JFrame implements ActionListener {
         // the text displayed on the button face. For example, when the Exit button is clicked,
         // pEvent.getActionCommand() would return "Exit".
 
+
         // Write code that determines if the Exit button is the source of the event and if so,
         // exit the application by calling System.exit().
-        ???
+
 
         // Write code that determines if the About button is the source of the event and if so,
         // display the about dialog using JOptionPane.showMessageDialog().
-        ???
+
+
+    }
+    }
 
 
 
@@ -161,6 +173,46 @@ public class View extends JFrame implements ActionListener {
 
 
 
-    }//End of
 
-}//End of main method
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
