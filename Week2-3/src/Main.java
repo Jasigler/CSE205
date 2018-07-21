@@ -2,6 +2,14 @@
 // CLASS: Main
 //**************************************************************************************************
 import javax.swing.JFrame;
+import java.awt.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import java.beans.PropertyChangeListener;
+import javax.swing.*;
+import javax.swing.border.Border;
+
+import static java.awt.BorderLayout.*;
 
 public class Main {
 
@@ -11,7 +19,7 @@ public class Main {
 
     public void run() {
         JFrame.setDefaultLookAndFeelDecorated(true);
-        View view = new View();
+        View theView = new View();
     }
 
 }

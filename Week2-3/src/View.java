@@ -5,8 +5,6 @@
 // Implements the GUI for a calculator.
 //
 //**************************************************************************************************
-import com.sun.deploy.panel.PathRenderer;
-import com.sun.deploy.panel.SpecialTableRenderer;
 
 import java.awt.*;
 import java.awt.event.ActionEvent;
@@ -14,7 +12,6 @@ import java.awt.event.ActionListener;
 import java.beans.PropertyChangeListener;
 import javax.swing.*;
 import javax.swing.border.Border;
-
 import static java.awt.BorderLayout.*;
 
 /**
@@ -22,11 +19,9 @@ import static java.awt.BorderLayout.*;
  */
 public class View extends JFrame implements ActionListener {
 
-    public static final int FRAME_WIDTH  = 500;
+    public static final int FRAME_WIDTH = 500;
     public static final int FRAME_HEIGHT = 200;
-
     private JTextField mText;
-
     /**
      * Default ctor. Does nothing.
      */
@@ -34,7 +29,9 @@ public class View extends JFrame implements ActionListener {
         // Declare and create a JPanel named panelFunctButton. Set the layout manager to GridLayout
         // with 2 rows and 2 columns. Call addButton() to add buttons labeled "x^y", "log 10",
         // "log e", and "sqrt".
+        //COMPLETE
         JPanel panelFunctButton = new JPanel();
+        panelFunctButton.setLayout(new GridLayout(2, 2));
         addButton(panelFunctButton, "x^y");
         addButton(panelFunctButton, "log 10");
         addButton(panelFunctButton, "log e");
@@ -43,52 +40,57 @@ public class View extends JFrame implements ActionListener {
 
         // Declare and create a JPanel named panelSysButton. Use the default FlowLayout layout
         // manager. Call addButton() to add buttons labeled "Clear", "About", and "Exit".
+        //COMPLETE
         JPanel panelSysButton = new JPanel();
         panelSysButton.setLayout(new FlowLayout());
         addButton(panelSysButton, "Clear");
         addButton(panelSysButton, "About");
         addButton(panelSysButton, "Exit");
 
-
-            // Declare and create a JPanel named panelFunctSys. Use the BorderLayout layout manager.
+        // Declare and create a JPanel named panelFunctSys. Use the BorderLayout layout manager.
         // Add panelFunctButton to the CENTER region. Add panelSysButton to the SOUTH region.
+        //COMPLETE
         JPanel panelFunctSys = new JPanel();
         panelFunctSys.setLayout(new BorderLayout());
-        panelFunctButton.add(panelFunctButton, BorderLayout.CENTER);
+        panelFunctSys.add(panelFunctButton, BorderLayout.CENTER);
         panelFunctSys.add(panelSysButton, BorderLayout.SOUTH);
 
         // Declare and create a JPanel named panelKeypad. Use the GridLayout layout manager with
         // 4 rows and 4 columns. Call addButton() to add the buttons labeled "7", "8", "9", and so
         // on.
+        //COMPLETE
         JPanel panelKeypad = new JPanel();
         panelKeypad.setLayout(new GridLayout(4, 4));
         addButton(panelKeypad, "7");
         addButton(panelKeypad, "8");
         addButton(panelKeypad, "9");
-        addButton(panelKeypad, "/");
         addButton(panelKeypad, "4");
         addButton(panelKeypad, "5");
         addButton(panelKeypad, "6");
-        addButton(panelKeypad, "*");
         addButton(panelKeypad, "1");
         addButton(panelKeypad, "2");
         addButton(panelKeypad, "3");
         addButton(panelKeypad, "0");
+        addButton(panelKeypad, "*");
+        addButton(panelKeypad, "/");
 
 
         // Declare and create a new JPanel named panelBottom. Use the vertical BoxLayout layout
         // manager. Add panelKeypad. Add a 10-pixel wide rigid area (using Box.createRigidArea()).
         // Add panelFunctSys.
+        //COMPLETE
         JPanel panelBottom = new JPanel();
+        panelBottom.setLayout(new BoxLayout(panelBottom, BoxLayout.Y_AXIS));
         panelBottom.add(panelKeypad);
-        panelBottom.add(Box.createRigidArea(new Dimension(10, 10)));
+        panelBottom.add(Box.createRigidArea(new Dimension(0, 10)));
+        panelBottom.add(panelFunctSys);
 
         // Declare and create a JPanel named panelTextField. Use the default FlowLayout layout
         // manager. Create the mText JTextField making it 30 columns wide. Add mText to the
         // panelTextField panel.
         JPanel panelTextField = new JPanel();
         panelTextField.setLayout(new FlowLayout());
-        JTextField mText = new JTextField(30);
+        mText = new JTextField(30);
         panelTextField.add(mText);
 
 
@@ -97,6 +99,7 @@ public class View extends JFrame implements ActionListener {
         // want to display. Add label to panelLabel.
         JPanel panelLabel = new JPanel();
         JLabel label = new JLabel("Kalkutron-9000");
+        panelLabel.setLayout(new FlowLayout());
         panelLabel.add(label);
 
         // Declare and create a JPanel named panelMain. Use the horizontal BoxLayout layout manager.
@@ -104,7 +107,7 @@ public class View extends JFrame implements ActionListener {
         // Add some more vertical glue. Add panelTextField. Add panelBottom. Add some more vertical
         // glue.
         JPanel panelMain = new JPanel();
-        panelMain.setLayout(new BoxLayout(panelMain, BoxLayout.PAGE_AXIS));
+        panelMain.setLayout(new BoxLayout(panelMain, BoxLayout.X_AXIS));
         panelMain.add(Box.createVerticalGlue());
         panelMain.add(panelLabel);
         panelMain.add(Box.createVerticalGlue());
@@ -114,7 +117,7 @@ public class View extends JFrame implements ActionListener {
 
 
         // Set the title bar string of this JFrame.
-       setTitle("Kalkutron-9000");
+        setTitle("Kalkutron-9000");
 
         // Set the width and height of this JFrame.
         setSize(FRAME_WIDTH, FRAME_HEIGHT);
@@ -129,6 +132,9 @@ public class View extends JFrame implements ActionListener {
         // Make this JFrame visible.
         setVisible(true);
     }
+
+    private String about = "This is the Kalkutron-9000. Original code\n" +
+            "edited by Jason Sigler for CSE205";
 
     /**
      * Declare and create a JButton object displaying pText. Make this JFrame the action listener
@@ -149,17 +155,26 @@ public class View extends JFrame implements ActionListener {
         // the text displayed on the button face. For example, when the Exit button is clicked,
         // pEvent.getActionCommand() would return "Exit".
 
-
+        String command = pEvent.getActionCommand();
+         mText.setText(command);
+         System.out.println(mText);
+         System.out.println(command);
         // Write code that determines if the Exit button is the source of the event and if so,
         // exit the application by calling System.exit().
-
+        if (command == "Exit") {
+            System.exit(0);
+        }
 
         // Write code that determines if the About button is the source of the event and if so,
         // display the about dialog using JOptionPane.showMessageDialog().
+        if (command == "About") {
+            JOptionPane.showMessageDialog(null, about, "About", JOptionPane.INFORMATION_MESSAGE);
 
+        }//End of action method
+    }//End of view method
 
-    }
-    }
+}//End of class
+
 
 
 
